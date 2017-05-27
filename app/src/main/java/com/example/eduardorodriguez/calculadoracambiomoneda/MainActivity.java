@@ -35,15 +35,23 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getSupportActionBar().setTitle("Convertidor de Moneda");
+
         initMainActivityVariables(); //Initialize global variables with the components on the activity
 
-
+        resetCampos(); //Asigna los valores iniciales a los campos en pantalla.
     }
 
+    /**
+     * Inicializa las variables necesarias de los componentes que se
+     * encuentran en la pantalla, para ser accedidos en el momento de
+     * iniciar el calculo.
+     */
     private void initMainActivityVariables() {
         ArrayAdapter<String> adapterToCurrency, adapterFromCurrency;
 
         findViewById(R.id.btnCalculate).setOnClickListener(this);
+        findViewById(R.id.btnLimpiar).setOnClickListener(this);
 
         metAmount = (EditText)findViewById(R.id.etAmount);
         metRate = (EditText)findViewById(R.id.etRate);
@@ -61,19 +69,46 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         msfromCurrency.setAdapter(adapterFromCurrency);
     }
 
+    /**
+     * Metodo ejecutado cuando se presiona el boton Calcular, el cual valida
+     * que los campos necesarios tengan informacion y realiza el calculo de la
+     * conversion de moneda.
+     * <p>
+     * @param  view the location of the image, relative to the url argument
+     * @see         View
+     */
     @Override
     public void onClick(View view) {
 
-        try {
-            validate(); // Validates the requires field have value before do the operation.
+        if(view.getId()==R.id.btnCalculate) {
+            try {
+                validate(); // Validates the requires field have value before do the operation.
 
-            doOperation(); //Calculates the equivalent currency amount.
+                doOperation(); //Calculates the equivalent currency amount.
+            } catch (MyException ex) {
+                Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+            }
         }
-        catch(MyException ex) {
-            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+        else if(view.getId()==R.id.btnLimpiar) {
+            resetCampos();
         }
     }
 
+    /**
+     * Asigna los valores iniciales de los campos en pantalla.
+     */
+    private void resetCampos() {
+        metAmount.setText("");
+        metRate.setText("");
+        tvResult.setText("0.00");
+        mstoCurrency.setSelection(0);
+        msfromCurrency.setSelection(0);
+    }
+
+    /**
+     * Realiza la operacion de conversion de moneda y la muestra en el TextView
+     * tvResult.
+     */
     private void doOperation() {
         double rate, amount, result;
 
@@ -85,6 +120,10 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         tvResult.setText(String.valueOf(result));
     }
 
+    /**
+     * Valida que los campos necesarios para la operacion contengan
+     * la informacion correcta.
+     */
     private void validate() throws RequireFieldException {
 
         if(metAmount.getText().toString().trim().length()==0)   {

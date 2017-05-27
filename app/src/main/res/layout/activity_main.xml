@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linealLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:gravity="center"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp">
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/exchange_rates" />
 
     <TextView
         android:id="@+id/tvResult"
@@ -16,50 +21,50 @@
         android:id="@+id/etAmount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/etAmountText"
         android:layout_below="@id/tvResult"
+        android:hint="@string/etAmountText"
         android:inputType="numberDecimal" />
 
-    <LinearLayout
-        android:id="@+id/linealLayout"
+    <Spinner
+        android:id="@+id/sToCurrency"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <ImageView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/etAmount"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:src="@drawable/up" />
 
-        <Spinner
-            android:id="@+id/sFromCurrency"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+    <Spinner
+        android:id="@+id/sFromCurrency"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/both_ways" />
-
-        <Spinner
-            android:id="@+id/sToCurrency"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
 
     <EditText
         android:id="@+id/etRate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@id/linealLayout"
-        android:layout_toLeftOf="@+id/btnCalculate"
         android:hint="@string/etRateText"
         android:inputType="numberDecimal" />
 
-    <Button
-        android:id="@+id/btnCalculate"
-        android:layout_width="96dp"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/linealLayout"
-        android:text="@string/btnCalculateText" />
+        android:gravity="center"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btnCalculate"
+            android:layout_width="96dp"
+            android:layout_height="wrap_content"
+            android:text="@string/btnCalculateText" />
 
-</RelativeLayout>
+        <Button
+            android:id="@+id/btnLimpiar"
+            android:layout_width="96dp"
+            android:layout_height="wrap_content"
+            android:text="@string/btnLimpiarText" />
+    </LinearLayout>
+
+</LinearLayout>

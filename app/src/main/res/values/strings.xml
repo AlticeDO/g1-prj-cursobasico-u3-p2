@@ -2,5 +2,6 @@
     <string name="app_name">CalculadoraCambioMoneda</string>
     <string name="etAmountText">Monto</string>
     <string name="btnCalculateText">Calcular</string>
+    <string name="btnLimpiarText">Limpiar</string>
     <string name="etRateText">Tasa de Cambio</string>
 </resources>
